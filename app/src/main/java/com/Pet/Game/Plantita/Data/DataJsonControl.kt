@@ -5,10 +5,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class LectorJson(private val contexto: Context) {
+public class DataJsonControl(private val contexto: Context) {
 
     // Función para leer el archivo JSON y devolver una lista
-    fun leerArchivoJson(): List<DataJsonControl> {
+    public fun leerArchivoJson(): List<PlantData> {
         val PlantData = "Datos_Planta.json"
         val contenidoJson = cargarJsonDesdeAssets(PlantData)
         return analizarJson(contenidoJson)
@@ -33,8 +33,8 @@ class LectorJson(private val contexto: Context) {
     }
 
     // Función para analizar el contenido JSON y crear una lista de personas
-    private fun analizarJson(contenidoJson: String): List<DataJsonControl> {
-        val listaPlanta = mutableListOf<DataJsonControl>()
+    private fun analizarJson(contenidoJson: String): List<PlantData> {
+        val listaPlanta = mutableListOf<PlantData>()
         try {
             val jsonArray = JSONArray(contenidoJson)
             for (i in 0 until jsonArray.length()) {
@@ -47,7 +47,7 @@ class LectorJson(private val contexto: Context) {
                 val NivelSolar = jsonObject.getInt("NivelSolar")
                 val First = jsonObject.getInt("First")
 
-                val Planta = DataJsonControl(Hidratacion, TipoPlanta, Salud, NivelSolar, First)
+                val Planta = PlantData (Hidratacion, TipoPlanta, Salud, NivelSolar, First)
                 listaPlanta.add(Planta)
             }
         } catch (e: Exception) {
@@ -57,4 +57,6 @@ class LectorJson(private val contexto: Context) {
     }
 }
 
-data class DataJsonControl(val Hidratacion: Int, val TipoPlanta: String, val Salud: Int, val NivelSolar: Int, val First: Int)
+public data class PlantData(val Hidratacion: Int, val TipoPlanta: String, val Salud: Int, val NivelSolar: Int, val First: Int) {
+    companion object
+}
