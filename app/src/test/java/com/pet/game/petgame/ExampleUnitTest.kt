@@ -1,4 +1,4 @@
-package com.Pet.Game.Plantita
+package com.pet.game.petgame
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.Pet.Game.Plantita
+package com.pet.game.petgame
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.Pet.Game.Plantita", appContext.packageName)
+        assertEquals("com.pet.game.petgame", appContext.packageName)
     }
 }
