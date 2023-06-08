@@ -2,7 +2,7 @@ package com.Pet.Game.Plantita.Data
 
 import android.content.Context
 import org.json.JSONArray
-import org.json.JSONObject
+import java.io.File
 import java.io.IOException
 
 public class DataJsonControl(private val contexto: Context) {
@@ -13,6 +13,9 @@ public class DataJsonControl(private val contexto: Context) {
         val contenidoJson = cargarJsonDesdeAssets(PlantData)
         return analizarJson(contenidoJson)
     }
+
+
+
 
     // Función para cargar el contenido del archivo JSON desde el directorio "assets"
     private fun cargarJsonDesdeAssets(PlantData: String): String {
@@ -31,6 +34,9 @@ public class DataJsonControl(private val contexto: Context) {
         println("Contenido JSON: $json")
         return json
     }
+
+
+
 
     // Función para analizar el contenido JSON y crear una lista de personas
     private fun analizarJson(contenidoJson: String): List<PlantData> {
@@ -55,7 +61,33 @@ public class DataJsonControl(private val contexto: Context) {
         }
         return listaPlanta
     }
+
+
+
+    
+    // Función para modificar el archivo JSON
+    public fun modificarJson(filePath: String) {
+        val file = File(filePath)
+        val contenidoJson = file.readText()
+
+        // Analizar el contenido JSON existente
+        val jsonArray = JSONArray(contenidoJson)
+
+        // Modificar los datos deseados
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+
+            // Modificar los campos requeridos
+            jsonObject.put("Hidratacion", 50)
+            jsonObject.put("Salud", 80)
+            jsonObject.put("NivelSolar", 90)
+        }
+
+        // Escribir el JSON modificado en el archivo
+        file.writeText(jsonArray.toString())
+    }
 }
+
 
 public data class PlantData(val Hidratacion: Int, val TipoPlanta: String, val Salud: Int, val NivelSolar: Int, val First: Int) {
     companion object
